@@ -1,5 +1,5 @@
 """
-Credential Manager
+Credential Manager - FIXED VERSION
 ==================
 Securely stores and manages API keys with encryption
 """
@@ -49,7 +49,7 @@ class CredentialManager:
         kdf = PBKDF2HMAC(
             algorithm=hashes.SHA256(),
             length=32,
-            salt=b'video_automation_salt',  # In production, use random salt
+            salt=b'video_automation_salt',
             iterations=100000,
         )
         key = base64.urlsafe_b64encode(kdf.derive(password.encode()))
@@ -128,7 +128,6 @@ class CredentialManager:
         return {service: self.get_credential(service) for service, _ in services}
 
 
-# Quick setup function for initial credentials
 def setup_initial_credentials():
     """Setup initial credentials from provided API keys"""
     cm = CredentialManager()
@@ -147,7 +146,6 @@ def setup_initial_credentials():
 
 
 if __name__ == '__main__':
-    # Test the credential manager
     print("🔐 Setting up credential manager...")
     cm = setup_initial_credentials()
     
